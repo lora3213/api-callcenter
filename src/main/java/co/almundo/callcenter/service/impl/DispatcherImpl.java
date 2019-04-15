@@ -42,16 +42,19 @@ public class DispatcherImpl implements DispatcherService {
     public CompletableFuture<Llamada> dispatchCall (Llamada llamada) throws InterruptedException{
 
         try{
-            String arregloNombreHilo = Thread.currentThread().getName().split("-")[1];
 
+            // modificacion del nombre del hilo
+            String arregloNombreHilo = Thread.currentThread().getName().split("-")[1];
             switch (arregloNombreHilo) {
                 case "1":
                     Thread.currentThread().setName(env.getProperty("threadConfiguration.prefixName") + TipoEmpleado.OPERADOR.getValor());
                     break;
                 case "2":
                     Thread.currentThread().setName(env.getProperty("threadConfiguration.prefixName") + TipoEmpleado.SUPERVISOR.getValor());
+                    break;
                 case "3":
                     Thread.currentThread().setName(env.getProperty("threadConfiguration.prefixName") + TipoEmpleado.DIRECTOR.getValor());
+                    break;
             }
 
             // Variable de ambiente de archivo de configuracion
