@@ -45,7 +45,7 @@ import java.util.concurrent.Executor;
 		executor.setCorePoolSize(Integer.parseInt(env.getProperty("threadConfiguration.corePoolSize")));
 		executor.setMaxPoolSize(Integer.parseInt(env.getProperty("threadConfiguration.maxPoolSize")));
 		executor.setQueueCapacity(Integer.parseInt(env.getProperty("threadConfiguration.queueCapacity")));
-		executor.setThreadNamePrefix("Tipo empleado-");
+		executor.setThreadNamePrefix(env.getProperty("threadConfiguration.prefixName"));
 		executor.initialize();
 		return executor;
 	}

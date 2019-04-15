@@ -2,6 +2,7 @@ package co.almundo.callcenter.service.impl;
 
 import co.almundo.callcenter.model.Estado;
 import co.almundo.callcenter.model.Llamada;
+import co.almundo.callcenter.model.TipoEmpleado;
 import co.almundo.callcenter.service.DispatcherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,18 @@ public class DispatcherImpl implements DispatcherService {
     public CompletableFuture<Llamada> dispatchCall (Llamada llamada) throws InterruptedException{
 
         try{
+            String arregloNombreHilo = Thread.currentThread().getName().split("-")[1];
+
+            switch (arregloNombreHilo) {
+                case "1":
+                    Thread.currentThread().setName(env.getProperty("threadConfiguration.prefixName") + TipoEmpleado.OPERADOR.getValor());
+                    break;
+                case "2":
+                    Thread.currentThread().setName(env.getProperty("threadConfiguration.prefixName") + TipoEmpleado.SUPERVISOR.getValor());
+                case "3":
+                    Thread.currentThread().setName(env.getProperty("threadConfiguration.prefixName") + TipoEmpleado.DIRECTOR.getValor());
+            }
+
             // Variable de ambiente de archivo de configuracion
             int maxTime = Integer.parseInt(env.getProperty("callConfiguration.maxTime"));
             int minTime = Integer.parseInt(env.getProperty("callConfiguration.minTime"));
