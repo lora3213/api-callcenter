@@ -1,0 +1,45 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.4.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'co.almundo.callcenter'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+bootJar {
+	baseName = 'api-callcenter'
+	version =  '0.1.0'
+	mainClassName = 'co.almundo.callcenter.app.ApiCallcenterApplication'
+}
+
+ext {
+	springCloudVersion = 'Finchley.RELEASE'
+}
+
+dependencies {
+	// dependencias spring
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('io.springfox:springfox-swagger2:2.8.0')
+	compile ('io.springfox:springfox-swagger-ui:2.8.0')
+	// dependencias test
+	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+}
+
